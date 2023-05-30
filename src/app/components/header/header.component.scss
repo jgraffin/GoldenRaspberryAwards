@@ -1,0 +1,12 @@
+.nav-link {
+  color: #666;
+  padding-left: 0;
+}
+
+.nav-pills {
+  .nav-link.active,
+  .show > .nav-link {
+    background-color: transparent;
+    color: #666;
+  }
+}
