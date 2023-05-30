@@ -1,1 +1,115 @@
-<p>dashboard works!</p>
+<div class="row justify-content-end">
+  <!-- Years with multiple winners -->
+  <div class="table-container col-md-5 m-4">
+    <h5>List years with multiple winners</h5>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Year</th>
+          <th scope="col">Win Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1987</th>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th scope="row">1986</th>
+          <td>2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Top 3 studios with winners -->
+  <div class="table-container col-md-5 m-4">
+    <h5>Top 3 studios with winners</h5>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Win Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Columbia Pictures</th>
+          <td>6</td>
+        </tr>
+        <tr>
+          <th scope="row">Paramount Pictures</th>
+          <td>7</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Producers with longest and shortest interval between wins -->
+  <div class="table-container col-md-5 m-4">
+    <h5>Producers with longest and shortest interval between wins</h5>
+    <h2>Maximum</h2>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Producer</th>
+          <th scope="col">Interval</th>
+          <th scope="col">Previous Year</th>
+          <th scope="col">Following Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Mathew Vaugn</th>
+          <td>13</td>
+          <td>2002</td>
+          <td>2015</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Minimum</h2>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Producer</th>
+          <th scope="col">Interval</th>
+          <th scope="col">Previous Year</th>
+          <th scope="col">Following Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Mathew Vaugn</th>
+          <td>13</td>
+          <td>2002</td>
+          <td>2015</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- List movie winners by year -->
+  <div class="table-container col-md-5 m-4">
+    <h5>List movie winners by year</h5>
+    <div class="table-container__search-bar">
+      <input type="number" name="searchByYear" placeholder="Search by year" />
+      <button type="submit"><fa-icon [icon]="faMagnifyingGlass"></fa-icon></button>
+    </div>
+    <table class="table table-success table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Year</th>
+          <th scope="col">Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">-</th>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

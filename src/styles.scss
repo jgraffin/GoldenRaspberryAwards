@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+.table {
+  border: 1px solid  #dadada;
+  font-size: 0.85rem;
+
+  thead {
+    th {
+      background: #f0f0f0;
+    }
+  }
+
+  &.table-striped {
+    > tbody > tr > * {
+      font-weight: 300;
+    }
+  }
+}
+
+.table > :not(caption) > * > * {
+  background-color: #fafafa;
+  box-shadow: none;
+  border-bottom-color: #dadada;
+}
