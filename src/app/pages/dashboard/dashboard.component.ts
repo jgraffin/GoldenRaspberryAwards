@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
@@ -9,34 +10,54 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  producersMin?: any = [];
-  producersMax?: any = [];
+  @Output() onSubmit = new EventEmitter<any>();
 
-  yearsMultipleWinners?: any = [];
+  producersMin$?: Observable<any>;
+  producersMax$?: Observable<any>;
+  studioWinners$?: Observable<any>;
 
-  private destroy$ = new Subject();
+  yearsMultipleWinners$?: Observable<any>;
+  movieWinnerByYear?: Observable<number>;
 
   faMagnifyingGlass = faMagnifyingGlass;
+
+  year = '';
+  winnerYears?: any = [];
+  searchForm!: FormGroup;
 
   constructor(private service: DashboardService){}
 
   ngOnInit(): void {
 
-    // Get all Max/Min Interval Producers
-    this.service.getProducersMaxMin().pipe(takeUntil(this.destroy$)).subscribe((items) => {
-      const { min, max } = items;
+    // Get all Max/Min Interval Producers list
+    this.producersMin$ = this.service.getProducersMaxMin();
+    this.producersMax$ = this.service.getProducersMaxMin();
 
-      this.producersMin = min;
-      this.producersMax = max;
+    // Get Years Multiple Winners list
+    this.yearsMultipleWinners$ = this.service.getYearsMultipleWinners();
 
+    // Get Winner Studios list
+    this.studioWinners$ = this.service.getStudiosWinners()
+
+    // Initialize forms
+    this.searchForm = new FormGroup({
+      year: new FormControl(''),
     });
+  }
 
-    // Get Years Multiple Winners
-    this.service.getYearsMultipleWinners().subscribe((items) => {
-      const { years } = items;
+  get searchBy() {
+    return this.searchForm.get('year')!;
+  }
 
-      this.yearsMultipleWinners = years;
+  submit() {
+    if (this.searchForm.invalid) {
+      return;
+    }
 
+    const date = this.searchForm.value;
+
+    this.service.getMovieWinnerByYear(date.year).subscribe(values => {
+      this.winnerYears = values;
     });
   }
 }

@@ -8,27 +8,27 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
   private baseApiUrl = environment.baseApiUrl;
-  private winner = `${this.baseApiUrl}?winner=true&year=2018`;
-  private producersMaxMin = `${this.baseApiUrl}?projection=max-min-win-interval-for-producers`;
-  private yearsMultipleWinners = `${this.baseApiUrl}?projection=years-with-multiple-winners`;
+  private producersMaxMinURL = `${this.baseApiUrl}?projection=max-min-win-interval-for-producers`;
+  private yearsMultipleWinnersURL = `${this.baseApiUrl}?projection=years-with-multiple-winners`;
+  private studioWinnersURL = `${this.baseApiUrl}?projection=studios-with-win-count`;
 
   //?page=9&size=99&winner=true&year=2018
-  // ?winner=true&year=2018) Works!
-  // ?projection=max-min-win-interval-for-producers Works!
-  // ?projection=studios-with-win-count Works!
-  // ?projection=years-with-multiple-winners Works!
 
   constructor(private http: HttpClient) {}
 
-  getWinner(): Observable<any> {
-    return this.http.get<any>(this.winner);
+  getMovieWinnerByYear(year: number): Observable<any> {
+    return this.http.get<any>(`${this.baseApiUrl}?winner=true&year=${year}`);
   }
 
   getProducersMaxMin(): Observable<any> {
-    return this.http.get<any>(this.producersMaxMin);
+    return this.http.get<any>(this.producersMaxMinURL);
   }
 
   getYearsMultipleWinners(): Observable<any> {
-    return this.http.get<any>(this.yearsMultipleWinners);
+    return this.http.get<any>(this.yearsMultipleWinnersURL);
+  }
+
+  getStudiosWinners(): Observable<any> {
+    return this.http.get<any>(this.studioWinnersURL);
   }
 }

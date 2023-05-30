@@ -10,13 +10,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1987</th>
-          <td>2</td>
-        </tr>
-        <tr>
-          <th scope="row">1986</th>
-          <td>2</td>
+        <tr *ngFor="let item of (yearsMultipleWinners$ | async)?.years">
+          <th scope="row">{{ item.year }}</th>
+          <td>{{ item.winnerCount }}</td>
         </tr>
       </tbody>
     </table>
@@ -33,13 +29,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Columbia Pictures</th>
-          <td>6</td>
-        </tr>
-        <tr>
-          <th scope="row">Paramount Pictures</th>
-          <td>7</td>
+        <tr *ngFor="let item of (studioWinners$ | async)?.studios.slice(0, 3)">
+          <th scope="row">{{ item.name }}</th>
+          <td>{{ item.winCount }}</td>
         </tr>
       </tbody>
     </table>
@@ -59,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of producersMin">
+        <tr *ngFor="let item of (producersMax$ | async)?.max">
           <th scope="row">{{ item.producer }}</th>
           <td>{{ item.interval }}</td>
           <td>{{ item.previousWin }}</td>
@@ -79,7 +71,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of producersMin">
+        <tr *ngFor="let item of (producersMin$ | async)?.min">
           <th scope="row">{{ item.producer }}</th>
           <td>{{ item.interval }}</td>
           <td>{{ item.previousWin }}</td>
@@ -93,8 +85,18 @@
   <div class="table-container col-md-5 m-4">
     <h5>List movie winners by year</h5>
     <div class="table-container__search-bar">
-      <input type="number" name="searchByYear" placeholder="Search by year" />
-      <button type="submit"><fa-icon [icon]="faMagnifyingGlass"></fa-icon></button>
+      <form (ngSubmit)="submit()" [formGroup]="searchForm">
+        <input
+          type="number"
+          name="search"
+          placeholder="Search by year"
+          formControlName="year"
+          required
+        />
+        <button type="submit">
+          <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+        </button>
+      </form>
     </div>
     <table class="table table-success table-striped">
       <thead>
@@ -104,12 +106,20 @@
           <th scope="col">Title</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">-</th>
-          <td>-</td>
+      <tbody *ngIf="winnerYears.length > 0; else noYearsResults">
+        <tr *ngFor="let item of winnerYears">
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ item.year }}</td>
+          <td>{{ item.title }}</td>
         </tr>
       </tbody>
+      <ng-template #noYearsResults>
+        <tbody>
+          <tr>
+            <th scope="row" colspan="3">No Results</th>
+          </tr>
+        </tbody>
+      </ng-template>
     </table>
   </div>
 </div>
