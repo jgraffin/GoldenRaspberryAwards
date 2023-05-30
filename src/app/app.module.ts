@@ -10,6 +10,7 @@ import { ListComponent } from './pages/list/list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     FontAwesomeModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

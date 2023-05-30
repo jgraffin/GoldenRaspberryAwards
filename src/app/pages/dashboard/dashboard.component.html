@@ -59,11 +59,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Mathew Vaugn</th>
-          <td>13</td>
-          <td>2002</td>
-          <td>2015</td>
+        <tr *ngFor="let item of producersMin">
+          <th scope="row">{{ item.producer }}</th>
+          <td>{{ item.interval }}</td>
+          <td>{{ item.previousWin }}</td>
+          <td>{{ item.followingWin }}</td>
         </tr>
       </tbody>
     </table>
@@ -79,11 +79,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Mathew Vaugn</th>
-          <td>13</td>
-          <td>2002</td>
-          <td>2015</td>
+        <tr *ngFor="let item of producersMin">
+          <th scope="row">{{ item.producer }}</th>
+          <td>{{ item.interval }}</td>
+          <td>{{ item.previousWin }}</td>
+          <td>{{ item.followingWin }}</td>
         </tr>
       </tbody>
     </table>
