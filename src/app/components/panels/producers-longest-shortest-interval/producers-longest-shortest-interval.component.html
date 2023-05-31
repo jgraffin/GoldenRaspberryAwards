@@ -1,0 +1,40 @@
+<h5>Producers with longest and shortest interval between wins</h5>
+<h2>Maximum</h2>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Producer</th>
+      <th scope="col">Interval</th>
+      <th scope="col">Previous Year</th>
+      <th scope="col">Following Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of producersMax?.max">
+      <th scope="row">{{ item.producer }}</th>
+      <td>{{ item.interval }}</td>
+      <td>{{ item.previousWin }}</td>
+      <td>{{ item.followingWin }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Minimum</h2>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Producer</th>
+      <th scope="col">Interval</th>
+      <th scope="col">Previous Year</th>
+      <th scope="col">Following Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of producersMin?.min">
+      <th scope="row">{{ item.producer }}</th>
+      <td>{{ item.interval }}</td>
+      <td>{{ item.previousWin }}</td>
+      <td>{{ item.followingWin }}</td>
+    </tr>
+  </tbody>
+</table>

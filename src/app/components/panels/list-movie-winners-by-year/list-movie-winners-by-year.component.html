@@ -1,0 +1,39 @@
+<h5>List movie winners by year</h5>
+<div class="table-container__search-bar">
+  <form (ngSubmit)="submit()" [formGroup]="searchForm">
+    <input
+      class="p-2 rounded border mb-2 me-4 w-75"
+      type="number"
+      name="search"
+      placeholder="Search by year"
+      formControlName="year"
+      required
+    />
+    <button class="btn btn-primary" type="submit">
+      <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+    </button>
+  </form>
+</div>
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Year</th>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="movieWinnerByYear.length > 0; else noYearsResults">
+    <tr *ngFor="let item of movieWinnerByYear">
+      <th scope="row">{{ item.id }}</th>
+      <td>{{ item.year }}</td>
+      <td>{{ item.title }}</td>
+    </tr>
+  </tbody>
+  <ng-template #noYearsResults>
+    <tbody>
+      <tr>
+        <th scope="row" colspan="3">No Results</th>
+      </tr>
+    </tbody>
+  </ng-template>
+</table>

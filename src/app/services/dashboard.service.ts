@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IMovieWinnerByYear } from '../interfaces/IMovieWinnerByYear';
+import { IProducersMaxMin } from '../interfaces/IProducersMaxMin';
+import { IYearsMultipleWinners } from '../interfaces/IYearsMultipleWinners';
+import { IStudioWinners } from '../interfaces/IStudioWinners';
 
 @Injectable({
   providedIn: 'root',
@@ -16,19 +20,19 @@ export class DashboardService {
 
   constructor(private http: HttpClient) {}
 
-  getMovieWinnerByYear(year: number): Observable<any> {
-    return this.http.get<any>(`${this.baseApiUrl}?winner=true&year=${year}`);
+  getMovieWinnerByYear(year: number): Observable<IMovieWinnerByYear[]> {
+    return this.http.get<IMovieWinnerByYear[]>(`${this.baseApiUrl}?winner=true&year=${year}`);
   }
 
-  getProducersMaxMin(): Observable<any> {
-    return this.http.get<any>(this.producersMaxMinURL);
+  getProducersMaxMin(): Observable<IProducersMaxMin> {
+    return this.http.get<IProducersMaxMin>(this.producersMaxMinURL);
   }
 
-  getYearsMultipleWinners(): Observable<any> {
-    return this.http.get<any>(this.yearsMultipleWinnersURL);
+  getYearsMultipleWinners(): Observable<IYearsMultipleWinners> {
+    return this.http.get<IYearsMultipleWinners>(this.yearsMultipleWinnersURL);
   }
 
-  getStudiosWinners(): Observable<any> {
-    return this.http.get<any>(this.studioWinnersURL);
+  getStudiosWinners(): Observable<IStudioWinners> {
+    return this.http.get<IStudioWinners>(this.studioWinnersURL);
   }
 }

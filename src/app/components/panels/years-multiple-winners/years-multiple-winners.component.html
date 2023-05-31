@@ -1,0 +1,17 @@
+
+  <h5>List years with multiple winners</h5>
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Win Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of yearsMultipleWinners?.years">
+        <th scope="row">{{ item.year }}</th>
+        <td>{{ item.winnerCount }}</td>
+      </tr>
+    </tbody>
+  </table>
+

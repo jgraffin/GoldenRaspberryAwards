@@ -12,6 +12,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { YearsMultipleWinnersComponent } from './components/panels/years-multiple-winners/years-multiple-winners.component';
+import { StudiosWinnersComponent } from './components/panels/studios-winners/studios-winners.component';
+import { ProducersLongestShortestIntervalComponent } from './components/panels/producers-longest-shortest-interval/producers-longest-shortest-interval.component';
+import { ListMovieWinnersByYearComponent } from './components/panels/list-movie-winners-by-year/list-movie-winners-by-year.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     HeaderComponent,
     SidebarComponent,
+    YearsMultipleWinnersComponent,
+    StudiosWinnersComponent,
+    ProducersLongestShortestIntervalComponent,
+    ListMovieWinnersByYearComponent,
   ],
   imports: [
     BrowserModule,

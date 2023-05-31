@@ -1,125 +1,28 @@
 <div class="row justify-content-end">
   <!-- Years with multiple winners -->
   <div class="table-container col-md-5 m-4">
-    <h5>List years with multiple winners</h5>
-    <table class="table table-success table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Year</th>
-          <th scope="col">Win Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of (yearsMultipleWinners$ | async)?.years">
-          <th scope="row">{{ item.year }}</th>
-          <td>{{ item.winnerCount }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-years-multiple-winners
+      [yearsMultipleWinners]="yearsMultipleWinners$ | async"
+    ></app-years-multiple-winners>
   </div>
 
   <!-- Top 3 studios with winners -->
   <div class="table-container col-md-5 m-4">
-    <h5>Top 3 studios with winners</h5>
-    <table class="table table-success table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Win Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of (studioWinners$ | async)?.studios.slice(0, 3)">
-          <th scope="row">{{ item.name }}</th>
-          <td>{{ item.winCount }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-studios-winners
+      [studioWinners]="studioWinners$ | async"
+    ></app-studios-winners>
   </div>
 
   <!-- Producers with longest and shortest interval between wins -->
   <div class="table-container col-md-5 m-4">
-    <h5>Producers with longest and shortest interval between wins</h5>
-    <h2>Maximum</h2>
-    <table class="table table-success table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Producer</th>
-          <th scope="col">Interval</th>
-          <th scope="col">Previous Year</th>
-          <th scope="col">Following Year</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of (producersMax$ | async)?.max">
-          <th scope="row">{{ item.producer }}</th>
-          <td>{{ item.interval }}</td>
-          <td>{{ item.previousWin }}</td>
-          <td>{{ item.followingWin }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>Minimum</h2>
-    <table class="table table-success table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Producer</th>
-          <th scope="col">Interval</th>
-          <th scope="col">Previous Year</th>
-          <th scope="col">Following Year</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of (producersMin$ | async)?.min">
-          <th scope="row">{{ item.producer }}</th>
-          <td>{{ item.interval }}</td>
-          <td>{{ item.previousWin }}</td>
-          <td>{{ item.followingWin }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-producers-longest-shortest-interval
+      [producersMin]="producersMin$ | async"
+      [producersMax]="producersMax$ | async"
+    ></app-producers-longest-shortest-interval>
   </div>
 
   <!-- List movie winners by year -->
   <div class="table-container col-md-5 m-4">
-    <h5>List movie winners by year</h5>
-    <div class="table-container__search-bar">
-      <form (ngSubmit)="submit()" [formGroup]="searchForm">
-        <input
-          type="number"
-          name="search"
-          placeholder="Search by year"
-          formControlName="year"
-          required
-        />
-        <button type="submit">
-          <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
-        </button>
-      </form>
-    </div>
-    <table class="table table-success table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Year</th>
-          <th scope="col">Title</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="winnerYears.length > 0; else noYearsResults">
-        <tr *ngFor="let item of winnerYears">
-          <th scope="row">{{ item.id }}</th>
-          <td>{{ item.year }}</td>
-          <td>{{ item.title }}</td>
-        </tr>
-      </tbody>
-      <ng-template #noYearsResults>
-        <tbody>
-          <tr>
-            <th scope="row" colspan="3">No Results</th>
-          </tr>
-        </tbody>
-      </ng-template>
-    </table>
+    <app-list-movie-winners-by-year></app-list-movie-winners-by-year>
   </div>
 </div>
