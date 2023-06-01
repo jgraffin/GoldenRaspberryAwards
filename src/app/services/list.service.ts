@@ -18,14 +18,14 @@ export class ListService {
   constructor(private http: HttpClient) {}
 
   getListMovies(): Observable<any> {
-    return this.http.get(`${this.listMoviesURL}?page=0&size=99`);
+    return this.http.get(`${this.listMoviesURL}?page=0&size=206`);
   }
 
   getListMovieByYear(year: number): Observable<any> {
-    return this.http.get(`${this.listMoviesURL}?page=0&size=99&year=${year}`);
+    return this.http.get(`${this.listMoviesURL}?page=0&size=206&year=${year}`);
   }
 
   getListMovieByWinner(winner: boolean): Observable<any> {
-    return this.http.get(`${this.listMoviesURL}?page=0&size=99&winner=${winner}`);
+    return this.http.get(`${this.listMoviesURL}?page=0&size=206&winner=${winner}`);
   }
 }

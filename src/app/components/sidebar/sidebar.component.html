@@ -1,15 +1,14 @@
 <div
-  class="d-flex flex-column flex-shrink-0 p-3 text-bg-lightgray"
-  style="width: 280px"
+  class="d-flex flex-column flex-shrink-0 p-3 text-bg-lightgray sidebar"
 >
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a href="" class="nav-link" aria-current="page"  [routerLink]="['']">
+      <a href="" class="nav-link" routerLink='/' routerLinkActive="is-active">
         Dashboard
       </a>
     </li>
     <li>
-      <a href="" class="nav-link" [routerLink]="['/list']">
+      <a href="" class="nav-link" routerLink="/list" routerLinkActive="is-active">
         List
       </a>
     </li>

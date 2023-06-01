@@ -1,48 +1,56 @@
 <div class="table-container m-4">
   <form [formGroup]="filterForm">
-    <table class="table table-success table-striped">
+    <table class="table table-movies-list table-striped">
       <thead>
         <tr>
           <th scope="col">ID</th>
           <th scope="col">
             Year<br />
-            <input type="text" maxlength="4" formControlName="filterByYear" (keyup)="onFilterByYear()"/>
+            <input
+              type="text"
+              maxlength="4"
+              id="searchQuery"
+              (input)="onFilterByYear($event)"
+            />
           </th>
           <th scope="col">Title</th>
           <th scope="col">
             Winner?<br />
-            <select formControlName="filterByWinner" (change)="onFilterByWinner()">
+            <select
+              formControlName="filterByWinner"
+              (change)="onFilterByWinner()"
+            >
               <option *ngFor="let item of options">
                 {{ item.name }}
-             </option>
+              </option>
             </select>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr
-        *ngFor="
-          let post of listMovies
-            | paginate
-              : {
-                  itemsPerPage: tableSize,
-                  currentPage: page,
-                  totalItems: count
-                };
-          let i = index
-        "
-      >
-        <th scope="row">{{ post.id }}</th>
-        <td>{{ post.year }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.winner ? 'Yes' : 'No' }}</td>
-      </tr>
+          *ngFor="
+            let post of listMovies
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+        >
+          <td>{{ post.id }}</td>
+          <td>{{ post.year }}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.winner ? "Yes" : "No" }}</td>
+        </tr>
       </tbody>
     </table>
-    <div class="d-flex justify-content-center">
+    <div class="table-pagination d-flex justify-content-center">
       <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
+        previousLabel=""
+        nextLabel=""
         (pageChange)="onTableDataChange($event)"
       >
       </pagination-controls>

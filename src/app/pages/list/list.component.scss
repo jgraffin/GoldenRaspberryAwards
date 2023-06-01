@@ -1,0 +1,33 @@
+.table-movies-list {
+  margin: 0;
+
+  tr {
+    th, td {
+      text-align: left;
+      border-right: 1px solid #dadada;
+      width: 25.5%;
+    }
+
+    th {
+      text-align: center;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid #dadada;
+      border-radius: 0.3rem;
+    }
+  }
+}
+
+.table-pagination {
+  background: #f0f0f0;
+  padding: 0;
+  border: 1px solid #dadada;
+  border-top: 0;
+
+  .ngx-pagination {
+    margin: 0;
+  }
+}
