@@ -6,12 +6,12 @@
           <th scope="col">ID</th>
           <th scope="col">
             Year<br />
-            <input type="number" formControlName="filterByYear" />
+            <input type="text" maxlength="4" formControlName="filterByYear" (keyup)="onFilterByYear()"/>
           </th>
           <th scope="col">Title</th>
           <th scope="col">
             Winner?<br />
-            <select name="cars" id="cars" (change)="submit()">
+            <select formControlName="filterByWinner" (change)="onFilterByWinner()">
               <option *ngFor="let item of options">
                 {{ item.name }}
              </option>

@@ -20,4 +20,12 @@ export class ListService {
   getListMovies(): Observable<any> {
     return this.http.get(`${this.listMoviesURL}?page=0&size=99`);
   }
+
+  getListMovieByYear(year: number): Observable<any> {
+    return this.http.get(`${this.listMoviesURL}?page=0&size=99&year=${year}`);
+  }
+
+  getListMovieByWinner(winner: boolean): Observable<any> {
+    return this.http.get(`${this.listMoviesURL}?page=0&size=99&winner=${winner}`);
+  }
 }
