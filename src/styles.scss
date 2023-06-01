@@ -1,5 +1,5 @@
 .table {
-  border: 1px solid  #dadada;
+  border: 1px solid #dadada;
   font-size: 0.85rem;
 
   thead {
@@ -8,15 +8,33 @@
     }
   }
 
+  tbody {
+    tr:nth-child(even) {
+      td {
+        background: #f6f6f6 !important;
+      }
+    }
+  }
+
   &.table-striped {
     > tbody > tr > * {
       font-weight: 300;
     }
+
+    > tbody > tr:nth-child(even) {
+      th {
+        background: #f6f6f6 !important;
+      }
+    }
+  }
+
+  > :not(caption) > * > * {
+    background-color: #fafafa;
+    box-shadow: none;
+    border-bottom-color: #dadada;
   }
 }
 
-.table > :not(caption) > * > * {
-  background-color: #fafafa;
-  box-shadow: none;
-  border-bottom-color: #dadada;
-}
+
+
+

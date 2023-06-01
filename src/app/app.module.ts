@@ -16,6 +16,7 @@ import { YearsMultipleWinnersComponent } from './components/panels/years-multipl
 import { StudiosWinnersComponent } from './components/panels/studios-winners/studios-winners.component';
 import { ProducersLongestShortestIntervalComponent } from './components/panels/producers-longest-shortest-interval/producers-longest-shortest-interval.component';
 import { ListMovieWinnersByYearComponent } from './components/panels/list-movie-winners-by-year/list-movie-winners-by-year.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ListMovieWinnersByYearComponent } from './components/panels/list-movie-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

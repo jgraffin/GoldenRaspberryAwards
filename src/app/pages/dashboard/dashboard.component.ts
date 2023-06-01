@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Observable } from 'rxjs';
-import { IMovieWinnerByYear } from 'src/app/interfaces/IMovieWinnerByYear';
 import { IProducersMaxMin } from 'src/app/interfaces/IProducersMaxMin';
 import { IStudioWinners } from 'src/app/interfaces/IStudioWinners';
 import { IYearsMultipleWinners } from 'src/app/interfaces/IYearsMultipleWinners';
