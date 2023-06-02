@@ -5,7 +5,10 @@
 
   .nav-link {
     &:hover {
-      color: #222;
+      color: inherit;
+    }
+    &.is-active {
+      color: #0d6efd;
     }
   }
 }

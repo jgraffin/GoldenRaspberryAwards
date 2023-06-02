@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProducersLongestShortestIntervalComponent } from './producers-longest-shortest-interval.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('ProducersLongestShortestIntervalComponent', () => {
   let component: ProducersLongestShortestIntervalComponent;
@@ -8,7 +10,11 @@ describe('ProducersLongestShortestIntervalComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProducersLongestShortestIntervalComponent]
+      declarations: [ProducersLongestShortestIntervalComponent],
+      imports: [
+        HttpClientModule,
+        FontAwesomeModule,
+      ],
     });
     fixture = TestBed.createComponent(ProducersLongestShortestIntervalComponent);
     component = fixture.componentInstance;
