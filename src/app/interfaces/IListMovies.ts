@@ -6,7 +6,11 @@ export interface IListContent {
     studios?: [];
     producers?: [];
     winner?: boolean;
-  }
+    totalPages?: number;
+  },
+  last: boolean;
+  size: number;
+  totalElements: number;
 }
 
 export interface IListMovies {

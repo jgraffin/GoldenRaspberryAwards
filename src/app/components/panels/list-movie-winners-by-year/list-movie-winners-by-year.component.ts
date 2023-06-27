@@ -7,10 +7,9 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 @Component({
   selector: 'app-list-movie-winners-by-year',
   templateUrl: './list-movie-winners-by-year.component.html',
-  styleUrls: ['./list-movie-winners-by-year.component.scss']
+  styleUrls: ['./list-movie-winners-by-year.component.scss'],
 })
 export class ListMovieWinnersByYearComponent implements OnInit {
-
   // Icons
   faMagnifyingGlass = faMagnifyingGlass;
 
@@ -21,14 +20,13 @@ export class ListMovieWinnersByYearComponent implements OnInit {
   searchForm!: FormGroup;
   year = '';
 
-  constructor(private service: DashboardService){}
+  constructor(private service: DashboardService) {}
 
   ngOnInit(): void {
-
-      // Get fields
-      this.searchForm = new FormGroup({
-        year: new FormControl(''),
-      });
+    // Get fields
+    this.searchForm = new FormGroup({
+      year: new FormControl(''),
+    });
   }
 
   get searchBy() {
@@ -42,7 +40,7 @@ export class ListMovieWinnersByYearComponent implements OnInit {
 
     const { year } = this.searchForm.value;
 
-    this.service.getMovieWinnerByYear(year).subscribe(value => {
+    this.service.getMovieWinnerByYear(year).subscribe((value) => {
       this.movieWinnerByYear = value;
     });
   }

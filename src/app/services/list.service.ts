@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IMovieWinnerByYear } from '../interfaces/IMovieWinnerByYear';
-import { IProducersMaxMin } from '../interfaces/IProducersMaxMin';
-import { IYearsMultipleWinners } from '../interfaces/IYearsMultipleWinners';
-import { IStudioWinners } from '../interfaces/IStudioWinners';
-import { IListContent, IListMovies } from '../interfaces/IListMovies';
+import { IListContent } from '../interfaces/IListMovies';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +13,9 @@ export class ListService {
 
   constructor(private http: HttpClient) {}
 
-  getListMovies(): Observable<IListContent> {
-    return this.http.get<IListContent>(`${this.listMoviesURL}?page=0&size=206`);
+  getListMovies(currentPage?: number, size?: number): Observable<IListContent> {
+    console.log('currentPage', currentPage, 'size ', size)
+    return this.http.get<IListContent>(`${this.listMoviesURL}?page=${currentPage}&size=${size}`);
   }
 
   getListMovieByYear(year: number): Observable<any> {
