@@ -6,15 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import {
-  Subject,
-  Subscription,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  take,
-} from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { IListMovies } from 'src/app/interfaces/IListMovies';
 import { ListService } from 'src/app/services/list.service';
 
@@ -25,19 +17,14 @@ import { ListService } from 'src/app/services/list.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListComponent implements OnInit {
-  @ViewChild('searchQuery') searchQuery: ElementRef;
-
   // It might return any, but observable content is typed within
   // Service as IListContent
   listMovies?: IListMovies | any;
 
   // Pagination
-  private readonly searchSubject = new Subject<string | undefined>();
-  page: number = 0;
-  count: number = 15;
-  tableSize: number = 7;
-  tableSizes: any = [3, 6, 9, 12];
-  searchSubscription?: Subscription;
+  page = 0;
+  count = 1;
+  tableSize = 4;
 
   // Form
   filterForm!: FormGroup;
@@ -47,14 +34,10 @@ export class ListComponent implements OnInit {
     { name: 'No', value: 2 },
   ];
 
-  constructor(private service: ListService, private router: Router) {}
+  constructor(private service: ListService) {}
 
   ngOnInit(): void {
-    // Get listMovies service
-    this.service.getListMovies(this.page, this.count).subscribe((items) => {
-      this.listMovies = items.content;
-      this.tableSize = Number(items.content.totalPages);
-    });
+    this.getTotalItems();
 
     // Get fields
     this.filterForm = new FormGroup({
@@ -62,89 +45,52 @@ export class ListComponent implements OnInit {
     });
   }
 
-  onTableDataChange(currentPage: number) {
-    this.page = currentPage;
+  getTotalItems() {
+    // Get totalItems from service, by passing required fields, where
+    // this.page = 0;
+    // this.count = 1;
+    this.service.getListMovies(this.page, this.count).subscribe({
+      next: (response) => {
+        this.count = response.totalElements;
 
-    this.service
-      .getListMovies(currentPage-1, this.count)
-      .subscribe(items => {
-        this.listMovies = items.content;
-        this.tableSize = Number(items.content.totalPages);
-        console.log(items);
-      });
+        if (this.count > 1) {
+          this.retrieveMovies();
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
-  // onTableSizeChange(event: any): void {
-  //   this.tableSize = event.target.value;
-  //   this.page = 1;
-  //   this.service
-  //     .getListMovies(this.page, this.count)
-  //     .subscribe((items) => this.listMovies = items.content);
-  // }
+  retrieveMovies() {
+    // Get all movies by passing the correct value retrieved from service, where
+    // this.page = 0;
+    // this.count = value retrieved;
+    this.service.getListMovies(this.page, this.count).subscribe({
+      next: (response) => {
+        const {
+          content,
+          pageable: { pageSize },
+        } = response;
+        const value = pageSize / 14;
 
-  // get filterByWinner() {
+        this.listMovies = content;
+        this.tableSize = +value.toFixed();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 
-  //   // Get form's field value
-  //   return this.filterForm.get('filterByWinner')!;
-  // }
+  onTableDataChange(currentPage: number) {
+    let current = currentPage - 1;
+    this.page = currentPage;
 
-  // onFilterByYear(event: Event) {
-  //   const searchQuery = (event.target as HTMLInputElement).value;
-  //   this.searchSubject.next(searchQuery?.trim());
-
-  //   // Debouncing results retrieved from service when filtering by Year
-  //   // Good practice when working with huge data in production.
-  //   // Whenever the user type in the form, it will wait 1s to return data
-  //   this.searchSubscription = this.searchSubject
-  //     .pipe(
-  //       debounceTime(1000),
-  //       distinctUntilChanged(),
-  //       switchMap((searchQuery) =>
-  //         this.service.getListMovieByYear(Number(searchQuery))
-  //       )
-  //     )
-  //     .subscribe((results) => {
-  //       if (results.content.length > 0) {
-  //         this.listMovies = results.content;
-  //       } else {
-  //         this.fetchMovies();
-  //       }
-  //     });
-  // }
-
-  // onFilterByWinner() {
-
-  //   // If "Yes", send a boolean "true" to the api and retrieve all winners
-  //   if (this.filterByWinner.value === 'Yes') {
-  //     this.service
-  //       .getListMovieByWinner(Boolean(this.filterByWinner.value))
-  //       .subscribe((winner) => {
-  //         if (winner.content) {
-  //           this.tableSize = winner.content.length;
-  //           this.listMovies = winner.content;
-  //         } else {
-  //           this.fetchMovies();
-  //         }
-  //       });
-  //   }
-
-  //   // If "No", send a boolean "false" to the api and retrieve all no-winners
-  //   if (this.filterByWinner.value === 'No') {
-  //     this.service
-  //       .getListMovieByWinner(Boolean(!this.filterByWinner.value))
-  //       .subscribe((winner) => {
-  //         if (winner.content.length > 0) {
-  //           this.tableSize = winner.content.length;
-  //           this.listMovies = winner.content;
-  //         } else {
-  //           this.fetchMovies();
-  //         }
-  //       });
-  //   }
-
-  //   // If set, just reset values of the table by retrieving fetchMovies()
-  //   if (this.filterByWinner.value === 'Yes/No') {
-  //     this.ngOnInit();
-  //   }
-  // }
+    this.service.getListMovies(current, 15).subscribe({
+      next: (response) => (this.listMovies = response.content),
+      error: (err) => console.error(err),
+    });
+  }
 }

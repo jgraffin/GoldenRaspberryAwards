@@ -8,7 +8,9 @@ export interface IListContent {
     winner?: boolean;
     totalPages?: number;
   },
-  last: boolean;
+  pageable: {
+    pageSize: number
+  },
   size: number;
   totalElements: number;
 }

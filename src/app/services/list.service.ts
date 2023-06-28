@@ -14,7 +14,6 @@ export class ListService {
   constructor(private http: HttpClient) {}
 
   getListMovies(currentPage?: number, size?: number): Observable<IListContent> {
-    console.log('currentPage', currentPage, 'size ', size)
     return this.http.get<IListContent>(`${this.listMoviesURL}?page=${currentPage}&size=${size}`);
   }
 
