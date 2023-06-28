@@ -9,7 +9,10 @@
             <input
               type="text"
               maxlength="4"
-              id="searchQuery"
+              name="filterByYear"
+              formControlName="filterByYear"
+              placeholder="Filter by year"
+              (change)="handleFilterYear()"
             />
           </th>
           <th scope="col">Title</th>
@@ -17,6 +20,7 @@
             Winner?<br />
             <select
               formControlName="filterByWinner"
+              (change)="handleFilterYear()"
             >
               <option *ngFor="let item of options">
                 {{ item.name }}

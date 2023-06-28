@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IListMovies } from 'src/app/interfaces/IListMovies';
 import { ListService } from 'src/app/services/list.service';
 
@@ -20,10 +20,10 @@ export class ListComponent implements OnInit {
 
   // Form
   filterForm!: FormGroup;
+  winner: true;
   options = [
-    { name: 'Yes/No', value: 0 },
-    { name: 'Yes', value: 1 },
-    { name: 'No', value: 2 },
+    { name: 'Yes', value: 0 },
+    { name: 'No', value: 1 },
   ];
 
   constructor(private service: ListService) {}
@@ -33,9 +33,24 @@ export class ListComponent implements OnInit {
 
     // Get fields
     this.filterForm = new FormGroup({
+      filterByYear: new FormControl('', [Validators.required, Validators.maxLength(4)]),
       filterByWinner: new FormControl(''),
     });
   }
+
+  handleFilterYear() {
+    const year = +this.filterForm.get('filterByYear').value;
+    const winner = this.filterForm.get('filterByWinner').value;
+
+    if (year) {
+      this.service.getListMovieByYear(this.page, this.count, winner, year).subscribe({
+        next: (response) => (this.listMovies = response.content),
+        error: (err) => console.error(err),
+      });
+    } else {
+      this.getTotalItems();
+    }
+ }
 
   getTotalItems() {
     // Get totalItems from service, by passing required fields, where

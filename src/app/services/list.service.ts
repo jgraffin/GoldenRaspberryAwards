@@ -4,6 +4,13 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IListMovies } from '../interfaces/IListMovies';
 
+type RequestParams = {
+  currentPage?: number,
+  size?: number,
+  winner?: boolean,
+  year?: number
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,9 +24,9 @@ export class ListService {
     return this.http.get<IListMovies>(`${this.listMoviesURL}?page=${currentPage}&size=${size}`);
   }
 
-  getListMovieByYear(year: number): Observable<any> {
+  getListMovieByYear(currentPage: number, size: number, winner: boolean, year: number): Observable<any> {
     return this.http.get<any>(
-      `${this.listMoviesURL}?page=0&size=206&year=${year}`
+      `${this.listMoviesURL}?page=${currentPage}&size=${size}&winner=${winner}&year=${year}`
     );
   }
 
