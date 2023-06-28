@@ -1,12 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
 import { IListMovies } from 'src/app/interfaces/IListMovies';
 import { ListService } from 'src/app/services/list.service';
 
@@ -18,7 +11,6 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class ListComponent implements OnInit {
   // It might return any, but observable content is typed within
-  // Service as IListContent
   listMovies?: IListMovies | any;
 
   // Pagination
